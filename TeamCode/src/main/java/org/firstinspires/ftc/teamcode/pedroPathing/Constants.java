@@ -8,14 +8,16 @@ import com.pedropathing.ftc.FollowerBuilder;
 import com.pedropathing.ftc.drivetrains.MecanumConstants;
 import com.pedropathing.ftc.localization.Encoder;
 import com.pedropathing.ftc.localization.constants.ThreeWheelConstants;
+import com.pedropathing.ftc.localization.constants.TwoWheelConstants;
 import com.pedropathing.paths.PathConstraints;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Constants {
 
     public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(7.8)
+            .mass(4.9)
             .forwardZeroPowerAcceleration(-50.64720731991507)
             .lateralZeroPowerAcceleration(-74.60771544812575)
             .useSecondaryTranslationalPIDF(true)
@@ -45,34 +47,21 @@ public class Constants {
             .xVelocity(75.72916299871545)
             .yVelocity(60.55093540552427);
 
-    public static ThreeWheelConstants localizerConstants =
-            new ThreeWheelConstants()
-                    .forwardTicksToInches(
-                            (0.0029484821524663665 +
-                                    0.0029229016217046495 +
-                                    0.002942851128369217 +
-                                    0.0029449372915088426 +
-                                    0.0029242569639630037) /
-                                    5
+    public static TwoWheelConstants localizerConstants = new TwoWheelConstants()
+            .forwardEncoder_HardwareMapName("rightFront")
+            .strafeEncoder_HardwareMapName("rightRear")
+            .forwardPodY(2.25)
+            .strafePodX(0)
+            .forwardEncoderDirection(Encoder.REVERSE)
+            .strafeEncoderDirection(Encoder.REVERSE)
+            //.forwardTicksToInches()
+            .IMU_HardwareMapName("imu")
+            .IMU_Orientation(
+                    new RevHubOrientationOnRobot(
+                            RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+                            RevHubOrientationOnRobot.UsbFacingDirection.UP
                     )
-                    .strafeTicksToInches(
-                            (0.002881137363098747 +
-                                    0.002881137363098747 +
-                                    0.0028859990752756358 +
-                                    0.002869235608335478 +
-                                    0.0028457820164093065) /
-                                    5
-                    )
-                    .turnTicksToInches(.00067156)
-                    .leftPodY(1)
-                    .rightPodY(-1)
-                    .strafePodX(-2.5)
-                    .leftEncoder_HardwareMapName("leftFront")
-                    .rightEncoder_HardwareMapName("rightRear")
-                    .strafeEncoder_HardwareMapName("rightFront")
-                    .leftEncoderDirection(Encoder.FORWARD)
-                    .rightEncoderDirection(Encoder.REVERSE)
-                    .strafeEncoderDirection(Encoder.FORWARD);
+            );
 
     public static PathConstraints pathConstraints = new PathConstraints(
             0.995,
@@ -84,7 +73,7 @@ public class Constants {
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .mecanumDrivetrain(driveConstants)
-                .threeWheelLocalizer(localizerConstants)
+                .twoWheelLocalizer(localizerConstants)
                 .pathConstraints(pathConstraints)
                 .build();
     }
