@@ -93,7 +93,7 @@ public class followerDrive extends OpMode{
             lefty.setPower(-1);
             righty.setPower(1);
 
-            gamepad1.rumble(1000);
+           // gamepad1.rumble(1000);
 
         }
         else if (gamepad1.dpad_down) {
@@ -103,7 +103,5 @@ public class followerDrive extends OpMode{
             lefty.setPower(0);
             righty.setPower(0);
         }
-
-
     }
 }
