@@ -67,29 +67,31 @@ public class followerDrive extends OpMode{
             //In case the drivers want to use a "slowMode" you can scale the vectors
             //This is the normal version to use in the TeleOp
             follower.setTeleOpDrive(
-                    -gamepad1.left_stick_y,
-                    -gamepad1.left_stick_x,
+                    gamepad1.left_stick_y,
+                    gamepad1.left_stick_x,
                     gamepad1.right_stick_x,
                     true // Robot Centric
             );
         }
 
-        if (gamepad1.a) {
-            ShootyMcShooterPants.setPower(0.7);
+        if (gamepad1.right_bumper) {
+            ShootyMcShooterPants.setPower(1);
         } else if (gamepad1.y) {
             ShootyMcShooterPants.setPower(1.0);
-            telemetry.addData("Status", "y pressed");
+            telemetry.addData("Shooter Status", "right bumper pressed");
             telemetry.update();
         } else if (gamepad1.x) {
             ShootyMcShooterPants.setPower(-1.0);
+            telemetry.addData("Shooter Status", "x pressed");
+            telemetry.update();
         }
         else {
-            ShootyMcShooterPants.setPower(0.6);
-            telemetry.addData("Status", "nothing");
+            ShootyMcShooterPants.setPower(1);
+            telemetry.addData("Shooter Status", "nothing");
             telemetry.update();
         }
 
-        if (gamepad1.b) {
+        if (gamepad1.left_bumper) {
             lefty.setPower(-1);
             righty.setPower(1);
 

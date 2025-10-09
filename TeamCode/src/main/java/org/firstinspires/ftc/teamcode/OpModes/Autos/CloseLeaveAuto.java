@@ -1,17 +1,13 @@
 package org.firstinspires.ftc.teamcode.OpModes.Autos;
 
-import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-
 @Autonomous
-public class LeaveAuto extends LinearOpMode {
+public class CloseLeaveAuto extends LinearOpMode {
 
     private DcMotor ShootyMcShooterPants = null;
     private CRServo lefty = null;
@@ -40,12 +36,12 @@ public class LeaveAuto extends LinearOpMode {
         rightBack.setDirection(DcMotor.Direction.REVERSE);
         waitForStart();
 
-        leftBack.setPower(.5);
-        rightBack.setPower(.5);
-        leftFront.setPower(.5);
-        rightFront.setPower(.5);
+        leftBack.setPower(-.5);
+        rightBack.setPower(-.5);
+        leftFront.setPower(-.5);
+        rightFront.setPower(-.5);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+        while (opModeIsActive() && (runtime.seconds() < 1)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
@@ -59,6 +55,9 @@ public class LeaveAuto extends LinearOpMode {
         telemetry.addData("Path", "Complete");
         telemetry.update();
         sleep(1000);
+
+        ShootyMcShooterPants.setPower(1);
+        sleep(99999);
     }
 
 
