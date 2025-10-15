@@ -25,7 +25,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 @Configurable
 @TeleOp
 
-public class followerDrive extends OpMode{
+public class followerDriveObsolete extends OpMode{
     public static Follower follower;
     public static Pose startingPose;
     private boolean automatedDrive;
@@ -38,7 +38,6 @@ public class followerDrive extends OpMode{
     private CRServo righty = null;
 
 
-
     //public static TelemetryManager telemetryM;
     public void init() {
         follower = Constants.createFollower(hardwareMap);
@@ -48,7 +47,6 @@ public class followerDrive extends OpMode{
         lefty = hardwareMap.get(CRServo.class, "Servo1");
         righty = hardwareMap.get(CRServo.class, "Servo2");
         ShootyMcShooterPants.setDirection(DcMotor.Direction.FORWARD );
-
 
 
     }
@@ -97,7 +95,7 @@ public class followerDrive extends OpMode{
             lefty.setPower(-1);
             righty.setPower(1);
 
-           // gamepad1.rumble(1000);
+            // gamepad1.rumble(1000);
 
         }
         else if (gamepad1.dpad_down) {
@@ -107,7 +105,5 @@ public class followerDrive extends OpMode{
             lefty.setPower(0);
             righty.setPower(0);
         }
-
-
     }
 }

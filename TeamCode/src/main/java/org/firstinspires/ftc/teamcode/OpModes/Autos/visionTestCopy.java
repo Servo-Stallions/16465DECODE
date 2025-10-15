@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.OpModes.Autos;
 
+import com.pedropathing.follower.Follower;
 import com.qualcomm.hardware.limelightvision.LLFieldMap;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
@@ -16,18 +18,25 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import com.pedropathing.geometry.Pose;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.vision.apriltag.AprilTagLibrary;
 import org.openftc.apriltag.AprilTagDetection;
 
+@Disabled
 @Autonomous
-public class visionTest extends LinearOpMode {
+public class visionTestCopy extends LinearOpMode {
 
+    private final Pose startPose = new Pose(0, 0, Math.toRadians(0));
     private Limelight3A limelight;
-    //private DcMotor ShootyMcShooterPants;
+    //private DcMotor Shooter;
+    private Pose currentPose;
+    private Follower follower;
 
     @Override
     public void runOpMode() throws InterruptedException
     {
+        follower = Constants.createFollower(hardwareMap);
+        follower.setStartingPose(startPose);
         limelight = hardwareMap.get(Limelight3A.class, "Limelight3A");
         //ShootyMcShooterPants = hardwareMap.get(DcMotor.class, "Shooter");
         telemetry.setMsTransmissionInterval(11);
@@ -36,31 +45,32 @@ public class visionTest extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            currentPose = follower.getPose();
             LLResult result = limelight.getLatestResult();
             double id = AprilTagLibrary.class.getModifiers();
             if (result != null) {
                 if (result.isValid()) {
-                    Pose3D botpose = result.getBotpose();
                     telemetry.addData("tx", result.getTx());
                     telemetry.addData("ty", result.getTy());
                     telemetry.addData("ta", result.getTa());
-                    telemetry.addData("Botpose", botpose.toString());
+                    telemetry.addData("currentPose", currentPose.toString());
                     telemetry.update();
                 }}
             if (result == null) {
-                Pose3D botpose = result.getBotpose();
-                telemetry.addData("help", "Its broken");
+                telemetry.addData("currentPose", "null");
                 telemetry.update();
             }
             if (AprilTagLibrary.class.getModifiers() == 21) {
-                //ShootyMcShooterPants.setPower(1);
+                //Shooter.setPower(1);
             }
             if (AprilTagLibrary.class.getModifiers() == 22) {
-                //ShootyMcShooterPants.setPower(1);
+                //Shooter.setPower(1);
             }
             if (AprilTagLibrary.class.getModifiers() == 23) {
-                //ShootyMcShooterPants.setPower(1);
+                //Shooter.setPower(1);
             }
         }
     }
 }
+
+//TODO HUDSON AND JB THIS HAS NO ERRORS BUT DOESNT SHOW DATA ON NULL; IT DOES HOWEVER USE POSE INSTEAD OF POSE3D SO ITS BETTER
