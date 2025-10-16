@@ -6,17 +6,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 @TeleOp
-public class testv2 extends OpMode{
+public class testv2 extends OpMode {
     private DcMotor intake = null;
-
 
 
     @Override
     public void init() {
         intake = hardwareMap.get(DcMotor.class, "intake");
-        intake.setDirection(DcMotor.Direction.FORWARD );
+        intake.setDirection(DcMotor.Direction.FORWARD);
         intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        telemetry.addData("Status", "Initialized");;
+        telemetry.addData("Status", "Initialized");
+        ;
 
 
     }
@@ -29,8 +29,10 @@ public class testv2 extends OpMode{
         } else {
             intake.setPower(0);
 
-    }
+        }
 
         telemetry.addData("Motor Power", intake.getPower());
-        telemetry.update();;
+        telemetry.update();
+        ;
+    }
 }
