@@ -15,6 +15,8 @@ public class testv2 extends OpMode{
     public void init() {
         intake = hardwareMap.get(DcMotor.class, "intake");
         intake.setDirection(DcMotor.Direction.FORWARD );
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        telemetry.addData("Status", "Initialized");;
 
 
     }
@@ -24,13 +26,11 @@ public class testv2 extends OpMode{
 
         if (gamepad1.right_bumper) {
             intake.setPower(1);
-        } else if (gamepad1.y) {
-            intake.setPower(1.0);
-            telemetry.addData("Shooter Status", "right bumper pressed");
-            telemetry.update();
-        } else if (gamepad1.x) {
-            intake.setPower(-1.0);
-            telemetry.addData("Shooter Status", "x pressed");
-            telemetry.update();
+        } else {
+            intake.setPower(0);
+
     }
+
+        telemetry.addData("Motor Power", intake.getPower());
+        telemetry.update();;
 }
