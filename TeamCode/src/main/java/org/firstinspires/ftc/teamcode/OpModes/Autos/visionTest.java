@@ -54,12 +54,18 @@ public class visionTest extends LinearOpMode {
             }
             if (AprilTagLibrary.class.getModifiers() == 21) {
                 //ShootyMcShooterPants.setPower(1);
+                telemetry.addData("tag", "Tag 21");
+                telemetry.update();
             }
             if (AprilTagLibrary.class.getModifiers() == 22) {
                 //ShootyMcShooterPants.setPower(1);
+                telemetry.addData("tag", "Tag 22");
+                telemetry.update();
             }
             if (AprilTagLibrary.class.getModifiers() == 23) {
                 //ShootyMcShooterPants.setPower(1);
+                telemetry.addData("tag", "Tag 23");
+                telemetry.update();
             }
         }
     }

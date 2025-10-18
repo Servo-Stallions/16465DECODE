@@ -10,6 +10,7 @@ import com.bylazar.telemetry.TelemetryManager;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.util.PoseHistory;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -24,7 +25,6 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Configurable
 @TeleOp
-
 public class followerDrive extends OpMode{
     public static Follower follower;
     public static Pose startingPose;
