@@ -5,20 +5,36 @@ import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 
 import java.util.Comparator;
 import java.util.List;
-
-//autonomous
 @Autonomous
 public class WorkingLimelightCode extends LinearOpMode {
 
     private Limelight3A limelight;
+    private DcMotorEx leftFront;
+
+    private DcMotorEx leftRear;
+
+    private DcMotorEx rightFront;
+
+    private DcMotorEx rightRear;
+
 
     public void runOpMode() throws InterruptedException {
         limelight = hardwareMap.get(Limelight3A.class, "Limelight3A"); // <-- semicolon was missing
+        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
+        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
+        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
+        leftFront.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        leftRear.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        rightRear.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         telemetry.setMsTransmissionInterval(11);
 
         limelight.pipelineSwitch(0);
@@ -45,7 +61,7 @@ public class WorkingLimelightCode extends LinearOpMode {
                             .max(Comparator.comparingDouble(LLResultTypes.FiducialResult::getTargetArea))
                             .orElse(null);
                     if (best != null) {
-                        seenId = best.getFiducialId();   // <-- This is the AprilTag ID you want
+                        seenId = best.getFiducialId();
                         telemetry.addData("AprilTag ID", seenId);
                         telemetry.addData("Tag area", best.getTargetArea());
                         telemetry.addData("Tag tx", result.getTx());
