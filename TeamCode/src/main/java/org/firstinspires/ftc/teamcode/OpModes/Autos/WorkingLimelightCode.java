@@ -68,22 +68,26 @@ public class WorkingLimelightCode extends LinearOpMode {
                         telemetry.addData("Tag ty", result.getTy());
                     }
                 }
+                //JB DON'T ADD SLEEPS
+
             }else {
                 telemetry.addLine("No valid Limelight result this frame.");
             }if(seenId == 21) {
-                telemetry.addLine("Tag 21 found!");
+                telemetry.addLine("Tag 21 found");
                 telemetry.update();
-                sleep(1000);
+                /*poses:
+                start: (25,95) heading: 45 degrees (3.141/4 rad)
+                1st point:
+
+                 */
             }else if (seenId == 22) {
-                telemetry.addLine("Tag 22 found!");
+                telemetry.addLine("Tag 22 found");
                 telemetry.update();
-                sleep(1000);
             }else if (seenId == 23) {
-                telemetry.addLine("Tag 23 found!");
+                telemetry.addLine("Tag 23 found");
                 telemetry.update();
-            sleep(1000);
             }else if (seenId == -1) {
-                telemetry.addLine("yeaaaaaaah so theres no april tag");
+                telemetry.addLine("No april tag found");
             }
             telemetry.update();
         }

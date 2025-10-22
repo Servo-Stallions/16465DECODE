@@ -46,7 +46,7 @@ public class followerDriveV2 extends OpMode{
 
     private CRServo servoR = null;
 
-    private Servo door = null;
+    private CRServo door = null;
 
     public void init() {
         follower = Constants.createFollower(hardwareMap);
@@ -61,7 +61,7 @@ public class followerDriveV2 extends OpMode{
         shooterR.setDirection(DcMotor.Direction.REVERSE );
         servoL = hardwareMap.get(CRServo.class, "servoL");
         servoR = hardwareMap.get(CRServo.class, "servoR");
-        door = hardwareMap.get(Servo.class, "door");
+        door = hardwareMap.get(CRServo.class, "door");
     }
 
     public void init_loop() {
@@ -83,8 +83,8 @@ public class followerDriveV2 extends OpMode{
                     true // Robot Centric
             );
         }
-        else if (gamepad1.left_bumper) {
-            intake.setPower(-1);
+        if (gamepad1.b) {
+            intake.setPower(1);
         }
         else {
             intake.setPower(0);
@@ -94,9 +94,8 @@ public class followerDriveV2 extends OpMode{
             shooterL.setPower(1);
 
         }
-        else if (gamepad1.b) {
-            shooterR.setPower(-1);
-            shooterL.setPower(-1);        }
+        //else if (gamepad1.b) {
+            //intake.setPower(1);      }
 
         else {
             shooterL.setPower(0);
@@ -125,5 +124,15 @@ public class followerDriveV2 extends OpMode{
             servoL.setPower(0);
 
         }
+        if (gamepad1.left_bumper){
+            door.setPower(-1);
+        }
+        else if (gamepad1.right_bumper){
+            door.setPower(1);
+        }
+        else {
+            door.setPower(0);
+        }
+
     }
 }
