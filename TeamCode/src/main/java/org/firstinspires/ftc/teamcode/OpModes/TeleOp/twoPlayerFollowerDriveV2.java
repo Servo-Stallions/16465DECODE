@@ -5,30 +5,17 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.Limelight3A;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.drawCurrent;
-import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.drawCurrentAndHistory;
-import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.follower;
-import com.bylazar.configurables.annotations.IgnoreConfigurable;
-import com.bylazar.telemetry.TelemetryManager;
-import com.pedropathing.util.PoseHistory;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Configurable
 @TeleOp
 
-public class followerDriveV2 extends OpMode{
+public class twoPlayerFollowerDriveV2 extends OpMode{
     public static Follower follower;
     public static Pose startingPose;
     private boolean automatedDrive;
@@ -83,16 +70,19 @@ public class followerDriveV2 extends OpMode{
                     true // Robot Centric
             );
         }
-        if (gamepad1.b) {
+        intake.setPower(gamepad2.left_stick_y);
+        shooterR.setPower(gamepad2.right_stick_y);
+        shooterL.setPower(gamepad2.right_stick_y);
+        if (gamepad2.b) {
             intake.setPower(1);
         }
-        else if (gamepad1.x) {
+        else if (gamepad2.x) {
             intake.setPower(-1);
         }
         else {
             intake.setPower(0);
         }
-        if (gamepad1.a) {
+        if (gamepad2.a) {
             shooterR.setPower(.67);
             shooterL.setPower(.67);
 
@@ -105,32 +95,32 @@ public class followerDriveV2 extends OpMode{
             shooterR.setPower(0);
 
         }
-        if (gamepad1.dpad_up) {
+        if (gamepad2.dpad_up) {
             servoR.setPower(1);
 
         }
-        else if (gamepad1.dpad_down) {
+        else if (gamepad2.dpad_down) {
             servoR.setPower(-1);
         }
         else {
             servoR.setPower(0);
 
         }
-        if (gamepad1.dpad_left) {
+        if (gamepad2.dpad_left) {
             servoL.setPower(1);
 
         }
-        else if (gamepad1.dpad_right) {
+        else if (gamepad2.dpad_right) {
             servoL.setPower(-1);
         }
         else {
             servoL.setPower(0);
 
         }
-        if (gamepad1.left_bumper){
+        if (gamepad2.left_bumper){
             door.setPosition(.72);
         }
-        else if (gamepad1.right_bumper){
+        else if (gamepad2.right_bumper){
             door.setPosition(.42);
         }
         else {

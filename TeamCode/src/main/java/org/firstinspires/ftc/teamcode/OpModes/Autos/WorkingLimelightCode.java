@@ -68,7 +68,6 @@ public class WorkingLimelightCode extends LinearOpMode {
                         telemetry.addData("Tag ty", result.getTy());
                     }
                 }
-                //JB DON'T ADD SLEEPS
 
             }else {
                 telemetry.addLine("No valid Limelight result this frame.");
@@ -79,7 +78,8 @@ public class WorkingLimelightCode extends LinearOpMode {
                 start: (25,95) heading: 45 degrees (3.141/4 rad)
                 1st point:
 
-                 */
+                */
+                March(10000,1,5000);
             }else if (seenId == 22) {
                 telemetry.addLine("Tag 22 found");
                 telemetry.update();
@@ -91,5 +91,33 @@ public class WorkingLimelightCode extends LinearOpMode {
             }
             telemetry.update();
         }
+
+    }
+
+    private void March(int distance, int speed, int time) {
+        leftFront.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        leftFront.setTargetPosition(distance);
+        leftFront.setTargetPositionTolerance(5);
+        leftFront.setPower(speed);
+        leftFront.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+        rightFront.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setTargetPosition(distance);
+        rightFront.setTargetPositionTolerance(5);
+        rightFront.setPower(speed);
+        rightFront.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+        leftRear.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        leftRear.setTargetPosition(distance);
+        leftRear.setTargetPositionTolerance(5);
+        leftRear.setPower(speed);
+        leftRear.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+        rightRear.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        rightRear.setTargetPosition(-distance);
+        rightRear.setTargetPositionTolerance(5);
+        rightRear.setPower(speed);
+        rightRear.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        sleep(time);
     }
 }

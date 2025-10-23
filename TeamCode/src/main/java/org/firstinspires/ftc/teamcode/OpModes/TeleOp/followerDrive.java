@@ -79,11 +79,11 @@ public class followerDrive extends OpMode{
         if (gamepad1.right_bumper) {
             ShootyMcShooterPants.setPower(1);
         } else if (gamepad1.y) {
-            ShootyMcShooterPants.setPower(1.0);
+            ShootyMcShooterPants.setPower(-1.0);
             telemetry.addData("Shooter Status", "right bumper pressed");
             telemetry.update();
         } else if (gamepad1.x) {
-            ShootyMcShooterPants.setPower(-1.0);
+            ShootyMcShooterPants.setPower(1.0);
             telemetry.addData("Shooter Status", "x pressed");
             telemetry.update();
         }
