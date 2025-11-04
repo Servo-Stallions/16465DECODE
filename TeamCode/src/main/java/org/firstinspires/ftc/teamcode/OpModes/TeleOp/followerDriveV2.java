@@ -47,6 +47,8 @@ public class followerDriveV2 extends OpMode{
     private CRServo servoR = null;
 
     private Servo door = null;
+    double dore = .76;
+
 
     public void init() {
         follower = Constants.createFollower(hardwareMap);
@@ -62,6 +64,9 @@ public class followerDriveV2 extends OpMode{
         servoL = hardwareMap.get(CRServo.class, "servoL");
         servoR = hardwareMap.get(CRServo.class, "servoR");
         door = hardwareMap.get(Servo.class, "door");
+        intake = hardwareMap.get(DcMotor.class, "intake");
+        intake.setDirection(DcMotor.Direction.FORWARD );
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     public void init_loop() {
@@ -97,7 +102,11 @@ public class followerDriveV2 extends OpMode{
             shooterL.setPower(.67);
 
         }
-        //else if (gamepad1.b) {
+        else if (gamepad1.y) {
+            shooterR.setPower(-.67);
+            shooterL.setPower(-.67);}
+
+            //else if (gamepad1.b) {
             //intake.setPower(1);      }
 
         else {
@@ -126,16 +135,73 @@ public class followerDriveV2 extends OpMode{
         else {
             servoL.setPower(0);
 
-        }
-        if (gamepad1.left_bumper){
-            door.setPosition(.72);
-        }
-        else if (gamepad1.right_bumper){
-            door.setPosition(.42);
-        }
-        else {
+        }/*
+        if (gamepad1.right_bumper){
             door.setPosition(.57);
+            //dore = dore - 0.05;
+            //door.setPosition(dore);
+        }
+        else if (gamepad1.left_bumper){
+            door.setPosition(0.96);
+            //dore = dore + 0.05;
+            //door.setPosition(dore);
+
+        }else {
+            door.setPosition(0.78);
+
+        }*/
+        double toggle = 0;
+        //r2 L1 M0
+        if (gamepad1.right_bumper) {
+            if (toggle == 2) {
+                door.setPosition(0.78);
+                toggle = 0;
+            } else if (toggle == 1) {
+                door.setPosition(.57);
+                toggle = 2;
+            } else if (toggle == 0) {
+                door.setPosition(.57);
+                toggle = 2;
+            }
+        }
+        else if (gamepad1.left_bumper){
+            if (toggle==1){
+                door.setPosition(0.78);
+                toggle=0;
+            }
+
+        else  if (toggle == 0){
+            door.setPosition(0.96);
+            toggle=1;}
+        else if (toggle == 2){
+            door.setPosition(0.96);
+            toggle=1;}
+    }
+        /*double toggle = 0;
+        //r2 L1 M0
+        if (gamepad1.right_bumper && toggle == 2) {
+            door.setPosition(0.78);
+            toggle = 0;
+        }
+        if (gamepad1.right_bumper && toggle == 1) {
+            door.setPosition(.57);
+            toggle = 2;
+        }
+        if (gamepad1.right_bumper && toggle == 0) {
+            door.setPosition(.57);
+            toggle = 2;
         }
 
-    }
-}
+        if (gamepad1.left_bumper && toggle == 1) {
+            door.setPosition(0.78);
+            toggle = 0;
+        }
+        if (gamepad1.left_bumper && toggle == 0) {
+            door.setPosition(0.96);
+            toggle = 1;
+        }
+        if (gamepad1.left_bumper && toggle == 2) {
+            door.setPosition(0.96);
+            toggle = 1;
+        }*/
+        }}

@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode.OpModes.Autos;
 
+import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
+
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -12,7 +15,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 
 import java.util.Comparator;
 import java.util.List;
+@Disabled
 @Autonomous
+
 public class WorkingLimelightCode extends LinearOpMode {
 
     private Limelight3A limelight;
@@ -32,6 +37,10 @@ public class WorkingLimelightCode extends LinearOpMode {
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
         rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
         leftFront.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
+
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
+
         leftRear.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         rightRear.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
@@ -74,15 +83,11 @@ public class WorkingLimelightCode extends LinearOpMode {
             }if(seenId == 21) {
                 telemetry.addLine("Tag 21 found");
                 telemetry.update();
-                /*poses:
-                start: (25,95) heading: 45 degrees (3.141/4 rad)
-                1st point:
 
-                */
-                March(10000,1,5000);
             }else if (seenId == 22) {
                 telemetry.addLine("Tag 22 found");
                 telemetry.update();
+
             }else if (seenId == 23) {
                 telemetry.addLine("Tag 23 found");
                 telemetry.update();
@@ -94,30 +99,5 @@ public class WorkingLimelightCode extends LinearOpMode {
 
     }
 
-    private void March(int distance, int speed, int time) {
-        leftFront.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        leftFront.setTargetPosition(distance);
-        leftFront.setTargetPositionTolerance(5);
-        leftFront.setPower(speed);
-        leftFront.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-
-        rightFront.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        rightFront.setTargetPosition(distance);
-        rightFront.setTargetPositionTolerance(5);
-        rightFront.setPower(speed);
-        rightFront.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-
-        leftRear.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        leftRear.setTargetPosition(distance);
-        leftRear.setTargetPositionTolerance(5);
-        leftRear.setPower(speed);
-        leftRear.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-
-        rightRear.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        rightRear.setTargetPosition(-distance);
-        rightRear.setTargetPositionTolerance(5);
-        rightRear.setPower(speed);
-        rightRear.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        sleep(time);
     }
-}
+

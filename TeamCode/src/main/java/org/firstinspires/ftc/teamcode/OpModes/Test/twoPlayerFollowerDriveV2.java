@@ -1,8 +1,9 @@
-package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
+package org.firstinspires.ftc.teamcode.OpModes.Test;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -14,6 +15,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Configurable
 @TeleOp
+@Disabled
 
 public class twoPlayerFollowerDriveV2 extends OpMode{
     public static Follower follower;
@@ -71,8 +73,8 @@ public class twoPlayerFollowerDriveV2 extends OpMode{
             );
         }
         intake.setPower(gamepad2.left_stick_y);
-        shooterR.setPower(gamepad2.right_stick_y);
-        shooterL.setPower(gamepad2.right_stick_y);
+        shooterR.setPower(gamepad2.right_stick_y*10);
+        shooterL.setPower(gamepad2.right_stick_y*10);
         if (gamepad2.b) {
             intake.setPower(1);
         }
@@ -85,11 +87,10 @@ public class twoPlayerFollowerDriveV2 extends OpMode{
         if (gamepad2.a) {
             shooterR.setPower(.67);
             shooterL.setPower(.67);
-
         }
-        //else if (gamepad1.b) {
-            //intake.setPower(1);      }
-
+        else if (gamepad2.y) {
+            shooterR.setPower(-.67);
+            shooterL.setPower(-.67);}
         else {
             shooterL.setPower(0);
             shooterR.setPower(0);
@@ -117,14 +118,14 @@ public class twoPlayerFollowerDriveV2 extends OpMode{
             servoL.setPower(0);
 
         }
-        if (gamepad2.left_bumper){
-            door.setPosition(.72);
-        }
-        else if (gamepad2.right_bumper){
-            door.setPosition(.42);
-        }
-        else {
+        if (gamepad2.right_bumper){
             door.setPosition(.57);
+        }
+        else if (gamepad2.left_bumper){
+            door.setPosition(0.96);
+        }else {
+            door.setPosition(0.78);
+
         }
 
     }

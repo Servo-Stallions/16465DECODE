@@ -1,31 +1,22 @@
-package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
-
-import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.drawCurrent;
-import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.drawCurrentAndHistory;
-import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.follower;
+package org.firstinspires.ftc.teamcode.OpModes.Depriciated;
 
 import com.bylazar.configurables.annotations.Configurable;
-import com.bylazar.configurables.annotations.IgnoreConfigurable;
-import com.bylazar.telemetry.TelemetryManager;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
-import com.pedropathing.util.PoseHistory;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-
+@Disabled
 @Configurable
 @TeleOp
-public class followerDrive extends OpMode{
+
+public class followerDriveObsolete extends OpMode{
     public static Follower follower;
     public static Pose startingPose;
     private boolean automatedDrive;
@@ -38,7 +29,6 @@ public class followerDrive extends OpMode{
     private CRServo righty = null;
 
 
-
     //public static TelemetryManager telemetryM;
     public void init() {
         follower = Constants.createFollower(hardwareMap);
@@ -48,7 +38,6 @@ public class followerDrive extends OpMode{
         lefty = hardwareMap.get(CRServo.class, "Servo1");
         righty = hardwareMap.get(CRServo.class, "Servo2");
         ShootyMcShooterPants.setDirection(DcMotor.Direction.FORWARD );
-
 
 
     }
@@ -79,11 +68,11 @@ public class followerDrive extends OpMode{
         if (gamepad1.right_bumper) {
             ShootyMcShooterPants.setPower(1);
         } else if (gamepad1.y) {
-            ShootyMcShooterPants.setPower(-1.0);
+            ShootyMcShooterPants.setPower(1.0);
             telemetry.addData("Shooter Status", "right bumper pressed");
             telemetry.update();
         } else if (gamepad1.x) {
-            ShootyMcShooterPants.setPower(1.0);
+            ShootyMcShooterPants.setPower(-1.0);
             telemetry.addData("Shooter Status", "x pressed");
             telemetry.update();
         }
@@ -97,7 +86,7 @@ public class followerDrive extends OpMode{
             lefty.setPower(-1);
             righty.setPower(1);
 
-           // gamepad1.rumble(1000);
+            // gamepad1.rumble(1000);
 
         }
         else if (gamepad1.dpad_down) {
@@ -107,7 +96,5 @@ public class followerDrive extends OpMode{
             lefty.setPower(0);
             righty.setPower(0);
         }
-
-
     }
 }
