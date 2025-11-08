@@ -21,11 +21,8 @@ public class RedFar extends LinearOpMode {
 
     private Limelight3A limelight;
     private DcMotorEx leftFront;
-
     private DcMotorEx leftRear;
-
     private DcMotorEx rightFront;
-
     private DcMotorEx rightRear;
     private DcMotor ShooterR = null;
     private CRServo servoL = null;
@@ -34,7 +31,6 @@ public class RedFar extends LinearOpMode {
     private Servo door = null;
     private Timer opTime;
     private DcMotor intake = null;
-
 
     public void runOpMode() throws InterruptedException {
         limelight = hardwareMap.get(Limelight3A.class, "Limelight3A"); // <-- semicolon was missing

@@ -48,7 +48,8 @@ public class followerDriveV2 extends OpMode{
 
     private Servo door = null;
     double dore = .76;
-
+    double toggle = 0;
+    double kms = 0;
 
     public void init() {
         follower = Constants.createFollower(hardwareMap);
@@ -115,7 +116,8 @@ public class followerDriveV2 extends OpMode{
 
         }
         if (gamepad1.dpad_up) {
-            servoR.setPower(1);
+
+            door.setPosition(0.78);
 
         }
         else if (gamepad1.dpad_down) {
@@ -126,11 +128,10 @@ public class followerDriveV2 extends OpMode{
 
         }
         if (gamepad1.dpad_left) {
-            servoL.setPower(1);
 
         }
         else if (gamepad1.dpad_right) {
-            servoL.setPower(-1);
+            servoL.setPower(1);
         }
         else {
             servoL.setPower(0);
@@ -150,33 +151,56 @@ public class followerDriveV2 extends OpMode{
             door.setPosition(0.78);
 
         }*/
-        double toggle = 0;
+
         //r2 L1 M0
-        if (gamepad1.right_bumper) {
+        if (gamepad1.left_bumper) {
+            /*kms=1;
             if (toggle == 2) {
                 door.setPosition(0.78);
                 toggle = 0;
-            } else if (toggle == 1) {
+                kms=0;
+            } else if ((toggle == 1) && (kms == 1)) {
                 door.setPosition(.57);
                 toggle = 2;
-            } else if (toggle == 0) {
+                kms=0;
+
+            } else if ((toggle == 0) && (kms == 1)) {
                 door.setPosition(.57);
                 toggle = 2;
-            }
+                kms=0;
+
+            }*/
+            door.setPosition(.40);
         }
-        else if (gamepad1.left_bumper){
-            if (toggle==1){
+        else if (gamepad1.right_bumper){
+           /* kms=1;
+
+            if ((toggle == 1) && (kms == 1)) {
                 door.setPosition(0.78);
                 toggle=0;
-            }
+                kms=0;
+            }else  if ((toggle == 0) && (kms == 1)) {
+            door.setPosition(0.96);
+                kms=0;
+                toggle=1;}
+            else if ((toggle == 2) && (kms == 1)) {
+            door.setPosition(0.96);
+                kms=0;
+                toggle=1;}*/
+            door.setPosition(1.2);
 
-        else  if (toggle == 0){
-            door.setPosition(0.96);
-            toggle=1;}
-        else if (toggle == 2){
-            door.setPosition(0.96);
-            toggle=1;}
-    }
+        }       else if (gamepad1.touchpad){
+
+            door.setPosition(0.78);
+
+        }
+        if (gamepad1.left_trigger > 0.1) {
+            servoR.setPower(1);
+        }
+        if (gamepad1.right_trigger > 0.1) {
+            servoL.setPower(-1);
+        }
+
         /*double toggle = 0;
         //r2 L1 M0
         if (gamepad1.right_bumper && toggle == 2) {

@@ -16,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import java.util.Comparator;
 import java.util.List;
 @Autonomous
-public class BlueFar extends LinearOpMode {
+public class BlueClose extends LinearOpMode {
 
     private Limelight3A limelight;
     private DcMotorEx leftFront;
@@ -35,8 +35,9 @@ public class BlueFar extends LinearOpMode {
     private DcMotor intake = null;
 
 
+
     public void runOpMode() throws InterruptedException {
-        limelight = hardwareMap.get(Limelight3A.class, "Limelight3A"); // <-- semicolon was missing
+        limelight = hardwareMap.get(Limelight3A.class, "Limelight3A");
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
@@ -62,7 +63,6 @@ public class BlueFar extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
-
 
             LLResult result = limelight.getLatestResult();
             int seenId = -1; // -1 = none this frame
@@ -91,97 +91,97 @@ public class BlueFar extends LinearOpMode {
                 }
 
             }else {
-                telemetry.addLine("No valid Limelight result this frame.");
-            }if(seenId == 21) {
+                telemetry.addLine("No valid Limelight result this frame.");}
+
+            if(seenId == 21) {
                 telemetry.addLine("Tag 21 found");
                 telemetry.update();
-                sleep(5000);
-                Backward( 2700);
-                rTurn(1100);
+                rTurn(1000);
+                forward(100);
                 while (opModeIsActive()) {
-            if (opTime.getElapsedTimeSeconds() > 3.94-0.2+5){
-                ShooterR.setPower(0.60);
-                ShooterL.setPower(0.60);}
-                if (opTime.getElapsedTimeSeconds() > 7-0.2+5){
-                    door.setPosition(.57);
-                    telemetry.addLine("Door movement");
-                    telemetry.update();}
-                if (opTime.getElapsedTimeSeconds() > 7.15-0.2+5){
-                    servoR.setPower(1);
-                    telemetry.addLine("ServoR movement");
-                    telemetry.update();}
-                if (opTime.getElapsedTimeSeconds() > 10.15-0.2+5){
-                    servoR.setPower(0);
-                door.setPosition(0.96);}
-                if (opTime.getElapsedTimeSeconds() > 10.5-0.2+5){
-                    ShooterR.setPower(0.70);
-                    ShooterL.setPower(0.70);
-                    servoL.setPower(-.8);
-                    telemetry.addLine("ServoL active");
-                    telemetry.update();}
-                if (opTime.getElapsedTimeSeconds() > 11-0.2+5){
-                    servoL.setPower(0);
-                    intake.setPower(1);
-                    telemetry.addLine("servoL stop");
-                    telemetry.update();}
-                if (opTime.getElapsedTimeSeconds() > 11.7-0.2+5){
-                    servoL.setPower(-.8);
-                    telemetry.addLine("ServoL 2 active");
-                    telemetry.update();}
-                if (opTime.getElapsedTimeSeconds() > 12.2+5){
-                    intake.setPower(0);
-                ShooterR.setPower(0);
-                ShooterL.setPower(0);}
-                    if (opTime.getElapsedTimeSeconds() > 12.3+5+5){
+                    if (opTime.getElapsedTimeSeconds() > 3.94-0.2){
+                        ShooterR.setPower(0.60);
+                        ShooterL.setPower(0.60);}
+                    if (opTime.getElapsedTimeSeconds() > 7-0.2){
+                        door.setPosition(.57);
+                        telemetry.addLine("Door movement");
+                        telemetry.update();}
+                    if (opTime.getElapsedTimeSeconds() > 7.15-0.2){
+                        servoR.setPower(1);
+                        telemetry.addLine("ServoR movement");
+                        telemetry.update();}
+                    if (opTime.getElapsedTimeSeconds() > 10.15-0.2){
+                        servoR.setPower(0);
+                        door.setPosition(0.96);
+                        telemetry.addLine("Door movement 2 and servoR stop");
+                        telemetry.update();}
+                    if (opTime.getElapsedTimeSeconds() > 10.5-0.2){
+                        ShooterR.setPower(0.70);
+                        ShooterL.setPower(0.70);
+                        servoL.setPower(-.8);
+                        telemetry.addLine("ServoL active");
+                        telemetry.update();}
+                    if (opTime.getElapsedTimeSeconds() > 11-0.2){
+                        servoL.setPower(0);
+                        intake.setPower(1);
+                        telemetry.addLine("servoL stop");
+                        telemetry.update();}
+                    if (opTime.getElapsedTimeSeconds() > 11.7-0.2){
+                        servoL.setPower(-.8);
+                        telemetry.addLine("ServoL 2 active");
+                        telemetry.update();}
+                    if (opTime.getElapsedTimeSeconds() > 12.2){
+                        intake.setPower(0);
+                        ShooterR.setPower(0);
+                        ShooterL.setPower(0);}
+                    if (opTime.getElapsedTimeSeconds() > 12.3+5.2){
                         servoL.setPower(0);
                         rightRear.setPower(-0.5);
                         rightFront.setPower(-0.5);
                         leftFront.setPower(-0.5);
                         leftRear.setPower(-0.5);}
-                    if (opTime.getElapsedTimeSeconds() > 12.8+5+5) {
+                    if (opTime.getElapsedTimeSeconds() > 12.8+4.8) {
                         rightRear.setPower(-1);
                         rightFront.setPower(1);
                         leftFront.setPower(-1);
                         leftRear.setPower(1);}
-                if (opTime.getElapsedTimeSeconds() > 13.1+5.3+5){
-                    rightRear.setPower(0);
-                    rightFront.setPower(0);
-                    leftFront.setPower(0);
-                    leftRear.setPower(0);
-                    sleep(30000);}}
+                    if (opTime.getElapsedTimeSeconds() > 13.1+5.4){
+                        rightRear.setPower(0);
+                        rightFront.setPower(0);
+                        leftFront.setPower(0);
+                        leftRear.setPower(0);
+                        sleep(30000);}}
             }else if (seenId == 22) {
                 telemetry.addLine("Tag 22 found");
                 telemetry.update();
-                sleep(5000);
-
-                Backward( 2700);
-                rTurn(1100);
+                rTurn(1000);
+                forward(130);
                 while (opModeIsActive()) {
-                    if (opTime.getElapsedTimeSeconds() > 3.94-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 3.94-0.2){
                         ShooterR.setPower(0.60);
                         ShooterL.setPower(0.60);}
-                    if (opTime.getElapsedTimeSeconds() > 7-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 7-0.2){
                         door.setPosition(.96);
                         telemetry.addLine("Door movement");
                         telemetry.update();}
-                    if (opTime.getElapsedTimeSeconds() > 7.15-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 7.15-0.2){
                         servoL.setPower(-1);intake.setPower(1);}
-                    if (opTime.getElapsedTimeSeconds() > 10.15-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 10.15-0.2){
                         servoL.setPower(0);
-                    if (opTime.getElapsedTimeSeconds() > 10.5-0.2+5){
-                        ShooterR.setPower(0.6);
-                        ShooterL.setPower(0.6);
-                        servoR.setPower(1);
-                        telemetry.update();}
-                    if (opTime.getElapsedTimeSeconds() > 11-0.2+5){
-                        servoR.setPower(0);
-                        intake.setPower(0);
-                        intake.setPower(1);}}
-                    if (opTime.getElapsedTimeSeconds() > 11.3-0.2+5){
+                        if (opTime.getElapsedTimeSeconds() > 10.5-0.2){
+                            ShooterR.setPower(0.6);
+                            ShooterL.setPower(0.6);
+                            servoR.setPower(1);
+                            telemetry.update();}
+                        if (opTime.getElapsedTimeSeconds() > 11-0.2){
+                            servoR.setPower(0);
+                            intake.setPower(0);
+                            intake.setPower(1);}}
+                    if (opTime.getElapsedTimeSeconds() > 11.3-0.2){
                         door.setPosition(0.57);}
-                    if (opTime.getElapsedTimeSeconds() > 11.7-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 11.7-0.2){
                         servoL.setPower(-1);}
-                    if (opTime.getElapsedTimeSeconds() > 12.3+6.3+5){
+                    if (opTime.getElapsedTimeSeconds() > 12.3+6.3){
                         servoL.setPower(0);
                         intake.setPower(0);
                         ShooterR.setPower(0);
@@ -190,12 +190,12 @@ public class BlueFar extends LinearOpMode {
                         rightFront.setPower(-0.5);
                         leftFront.setPower(-0.5);
                         leftRear.setPower(-0.5);}
-                    if (opTime.getElapsedTimeSeconds() > 12.8+6.3+5) {
+                    if (opTime.getElapsedTimeSeconds() > 12.8+6.3) {
                         rightRear.setPower(-1);
                         rightFront.setPower(1);
                         leftFront.setPower(-1);
                         leftRear.setPower(1);}
-                    if (opTime.getElapsedTimeSeconds() > 13.1+6.6+5){
+                    if (opTime.getElapsedTimeSeconds() > 13.1+6.6){
                         rightRear.setPower(0);
                         rightFront.setPower(0);
                         leftFront.setPower(0);
@@ -204,48 +204,47 @@ public class BlueFar extends LinearOpMode {
             }else if (seenId == 23) {
                 telemetry.addLine("Tag 23 found");
                 telemetry.update();
-                sleep(5000);
-                Backward( 2700);
-                rTurn(1100);
+                rTurn(1000);
+                forward(110);
                 while (opModeIsActive()) {
-                    if (opTime.getElapsedTimeSeconds() > 3.94-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 3.94-0.2){
                         ShooterR.setPower(0.60);
                         ShooterL.setPower(0.60);}
-                    if (opTime.getElapsedTimeSeconds() > 7-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 7-0.2){
                         door.setPosition(.96);
                         telemetry.addLine("Door movement");
                         telemetry.update();}
-                    if (opTime.getElapsedTimeSeconds() > 7.15-0.2+5){
-                        servoL.setPower(-1);intake.setPower(1);}
-                    if (opTime.getElapsedTimeSeconds() > 10.15-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 7.15-0.2){
+                        servoL.setPower(-0.7);intake.setPower(1);}
+                    if (opTime.getElapsedTimeSeconds() > 10.15-0.2){
                         servoL.setPower(0);
                         door.setPosition(0.57);
-                    intake.setPower(1);}
-                    if (opTime.getElapsedTimeSeconds() > 10.5-0.2+5){
+                        intake.setPower(1);}
+                    if (opTime.getElapsedTimeSeconds() > 10.5-0.3){
                         ShooterR.setPower(0.6);
                         ShooterL.setPower(0.6);
                         servoL.setPower(-.8);
                         telemetry.addLine("ServoL active");
                         telemetry.update();}
-                    if (opTime.getElapsedTimeSeconds() > 11-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 11-0.2){
                         servoL.setPower(0);
                         intake.setPower(0);
                         telemetry.addLine("servoL stop");
                         telemetry.update();}
-                    if (opTime.getElapsedTimeSeconds() > 11.7-0.2+5){
+                    if (opTime.getElapsedTimeSeconds() > 11.7-0.2){
                         servoR.setPower(.8);}
-                    if (opTime.getElapsedTimeSeconds() > 12.3+5+5){
+                    if (opTime.getElapsedTimeSeconds() > 12.3+5){
                         servoR.setPower(0);
                         rightRear.setPower(-0.5);
                         rightFront.setPower(-0.5);
                         leftFront.setPower(-0.5);
                         leftRear.setPower(-0.5);}
-                    if (opTime.getElapsedTimeSeconds() > 12.8+5+5) {
+                    if (opTime.getElapsedTimeSeconds() > 12.8+5) {
                         rightRear.setPower(-1);
                         rightFront.setPower(1);
                         leftFront.setPower(-1);
                         leftRear.setPower(1);}
-                    if (opTime.getElapsedTimeSeconds() > 13.1+5.3+5){
+                    if (opTime.getElapsedTimeSeconds() > 13.1+5.3){
                         rightRear.setPower(0);
                         rightFront.setPower(0);
                         leftFront.setPower(0);
@@ -253,18 +252,13 @@ public class BlueFar extends LinearOpMode {
                         sleep(30000);}}
             }else if (seenId == -1) {
                 telemetry.addLine("No april tag found");
-                /*Backward( 2600);
-                rTurn(1150);
-                sleep(1000);
-                shootPower=1;
-                sleep(4000);*/
-
-
-            }
+                strafeLeft(1100);
+                sleep(100);
+                lTurn(200);
+                sleep(1234);
+           }
             telemetry.update();
-        }
-
-    }
+        }}
     public void forward(int x) {
         leftRear.setPower(0.5);
         rightRear.setPower(0.5);
